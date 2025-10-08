@@ -1,0 +1,126 @@
+spring:
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      token: root
+      kv:
+        enabled: true
+        backend: secret
+        default-context: springboot-vault-docker
+  config:
+    import: vault://
+
+  data:
+    redis:
+      host: ${REDIS_HOST}
+      port: ${REDIS_PORT}
+  mail:
+    host: ${MAIL_HOST}
+    port: ${MAIL_PORT}
+    username: ${MAIL_USERNAME}
+    password: ${MAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        jdbc:
+          batch_size: 1000
+        order_inserts: true
+        order_updates: true
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+sepay:
+  api-key: ${SEPAY_API_KEY}
+ably:
+  api-key: ${ABLY_API_KEY}
+
+axon:
+  axonserver:
+    enabled: false
+
+logging:
+  level:
+    org.zalando.logbook: TRACE
+    hanniejewelry.vn.shared.service.ExistenceCheckerImpl: INFO
+    org.axonframework: DEBUG
+    hanniejewelry.vn.notification.handler: DEBUG
+
+logbook:
+  filter:
+    enabled: true
+  format:
+    style: http
+  obfuscate:
+    headers:
+      - Authorization
+      - X-API-KEY
+    parameters:
+      - password
+      - token
+
+server:
+  port: 8443
+  error:
+    include-exception: true
+    include-message: always
+    include-stacktrace: always
+    whitelabel:
+      enabled: true
+  ssl:
+    enabled: true
+    key-store: classpath:keystore.p12
+    key-store-password: ${SSL_KEYSTORE_PASSWORD}
+    key-store-type: PKCS12
+    key-alias: my-ssl-key
+
+ghn:
+  token: ${GHN_TOKEN}
+  url:
+    district: ${GHN_DISTRICT_URL}
+    province: ${GHN_PROVINCE_URL}
+    ward: ${GHN_WARD_URL}
+
+haravan:
+  access-token: ${HARAVAN_ACCESS_TOKEN}
+
+cloudinary:
+  cloud-name: ${CLOUDINARY_CLOUD_NAME}
+  api-key: ${CLOUDINARY_API_KEY}
+  api-secret: ${CLOUDINARY_API_SECRET}
+
+sendgrid:
+  api-key: ${SENDGRID_API_KEY}
+  from: ${SENDGRID_FROM}
+
+security:
+  jwt:
+    secret-key: ${JWT_SECRET_KEY}
+    expiration-time: ${JWT_EXPIRATION_TIME}
+
+speedsms:
+  access-token: ${SPEEDSMS_ACCESS_TOKEN}
+
+textbee:
+  device-id: ${TEXTBEE_DEVICE_ID}
+  api-key: ${TEXTBEE_API_KEY}
+
+app:
+  demoApiKey: ${DEMO_API_KEY}

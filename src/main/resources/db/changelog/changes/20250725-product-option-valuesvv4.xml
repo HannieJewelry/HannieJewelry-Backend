@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="create-product-option-value-table" author="dev">
+        <createTable tableName="product_option_value">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="value" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="option_type" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="position" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="active" type="BOOLEAN" defaultValueBoolean="true">
+                <constraints nullable="false"/>
+            </column>
+            <column name="color_code" type="VARCHAR(50)"/>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="created_by" type="VARCHAR(255)"/>
+            <column name="updated_by" type="VARCHAR(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="product-option-values2" author="dev">
+        <loadData
+                file="data/product-option-values.csv"
+                tableName="product_option_value"
+                separator=",">
+            <column name="id" type="NUMERIC"/>
+            <column name="value" type="STRING"/>
+            <column name="option_type" type="STRING"/>
+            <column name="position" type="NUMERIC"/>
+            <column name="active" type="BOOLEAN"/>
+            <column name="color_code" type="STRING"/>
+        </loadData>
+    </changeSet>
+
+
+</databaseChangeLog>

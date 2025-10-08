@@ -1,0 +1,190 @@
+
+PUT {{BASE_URL}}/api/client/checkout
+
+2025-09-11T15:31:05.541+07:00 TRACE 9884 --- [demo-liquibase] [nio-8443-exec-6] org.zalando.logbook.Logbook              : Incoming Request: b203ceccc86e8311
+Remote: 0:0:0:0:0:0:0:1
+PUT https://localhost:8443/api/client/checkout HTTP/1.1
+accept: */*
+accept-encoding: gzip, deflate, br
+authorization: XXX
+connection: keep-alive
+content-length: 267
+content-type: application/json
+cookie: cart_token=; auth-token=eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIrODQ5MTQ2OTY2NjVAbm8tZW1haWwubG9jYWwiLCJpYXQiOjE3NTc1NzkxNzYsImV4cCI6MTc1NzY2NTU3Nn0.fWx1QjrbCW2N-tCPSdI_BEUv4oxhhaIpnyb6BzLOBaA
+host: localhost:8443
+postman-token: 0e25b551-e2cc-429b-b680-45f76fe1b64e
+user-agent: PostmanRuntime/7.46.0
+
+{"attributes":[{"key":"shipping_instructions","value":"Leave at the door"}],"address_id":"f2ff6650-371d-47da-8112-9b3173a0f162","note":"Giao hàng buổi sáng","shipping_method_id":1,"payment_method_id":1}
+2025-09-11T15:31:05.575+07:00 TRACE 9884 --- [demo-liquibase] [nio-8443-exec-6] org.zalando.logbook.Logbook              : Outgoing Response: b203ceccc86e8311
+Duration: 33 ms
+HTTP/1.1 200 OK
+Cache-Control: no-cache, no-store, max-age=0, must-revalidate
+Connection: keep-alive
+Content-Type: application/json
+Date: Thu, 11 Sep 2025 08:31:05 GMT
+Expires: 0
+Keep-Alive: timeout=60
+Pragma: no-cache
+Strict-Transport-Security: max-age=31536000 ; includeSubDomains
+Transfer-Encoding: chunked
+Vary: Origin, Access-Control-Request-Method, Access-Control-Request-Headers
+X-Content-Type-Options: nosniff
+X-Frame-Options: DENY
+X-XSS-Protection: 0
+
+{"message":"Thành công","code":200,"data":{"id":"e27128ff-71cf-49b0-82fb-58b213199ec6","phone_country_code":"+84","phone":null,"full_name":null,"email":null,"email_option":3,"shipping_address":null,"shipping_city":null,"shipping_zip_code":null,"shipping_company":null,"shipping_country_id":null,"shipping_province_id":null,"shipping_district_id":null,"shipping_ward_id":null,"shipping_method_id":null,"shipping_method_name":null,"payment_method_name":null,"payment_method_id":null,"pay_deposit_only":false,"deposit_required":false,"utm_parameters":{"source":null,"medium":null,"campaign":null,"term":null,"content":null,"id":null,"source_platform":null,"landing_site":"/","landing_site_ref":null,"referrer_site":null,"tracking_id":null},"deposit_amount":0,"deposit_codamount":0,"note":"","requires_shipping":true,"created_at":"2025-09-11T08:31:05.572155100Z","updated_at":"2025-09-11T08:31:05.572155100Z","completed_at":"2025-09-11T08:31:05.572155100Z","errors":[],"warnings":[],"user_errors":[],"ready":true,"line_items":[{"id":"fee0a996-e803-4fc6-88ff-5df04799a8a0","seq":null,"price":9965000.0,"quantity":1,"weight":0.0,"unit":null,"attributes":[],"components":null,"variant_id":1,"variant_type":null,"product_id":"6dbfc99f-d7be-4ab0-a445-b21643f397ef","product_title":"Nhẫn cầu hôn Vàng 14K đá Moissanite","variant_title":"Vàng 14K / Size 8","image_url":null,"price_original":9965000.0,"line_price":9965000.0,"line_discount":null,"line_weight":0.0,"line_tax":null,"line_amount":9965000.0,"available_quantity":null,"lot_support":null,"variant_unit_id":null,"unit_ratio":null,"requires_shipping":true,"not_allow_promotion":false,"discount_allocations":[]}],"shipping_methods":[{"id":1,"name":"Home Delivery","description":"Home delivery within 2-3 business days","price":0.0,"code":"home_delivery"}],"payment_methods":[{"id":1,"name":"Cash on Delivery (COD)","description":"Pay with cash when receiving the goods","code":"cod","online":false,"system_type_id":1},{"id":2,"name":"Bank Transfer","description":"Transfer via bank account","code":"bank_transfer","online":false,"system_type_id":2}],"discount_allocations":[],"gift_cards":[],"attributes":{},"discount":0,"location_id":null,"location_name":null,"location_country_id":null,"auth_email":"+84914696665@no-email.local","auth_phone":null,"auth_name":"+84914696665@no-email.local","customer_membership":null,"sub_total_before_tax":9965000.0,"sub_total_tax":0,"sub_total":9965000.0,"shipping_before_tax":9965000.0,"shipping_tax":0,"shipping":0,"total_tax_included":0,"total_tax_not_included":0,"total":9965000.0,"order":null,"channel":"web","disallow_loyalty_program":false,"send_notify":true,"send_receipt":true,"allow_pick_at_location":false,"pick_at_location":false,"next_actions":null,"einvoice_info":null,"einvoice_request":null}}
+
+
+request 
+{
+  "attributes": [
+    {
+      "key": "shipping_instructions",
+      "value": "Leave at the door"
+    }
+  ],
+  "address_id": "f2ff6650-371d-47da-8112-9b3173a0f162",
+  "note": "Giao hàng buổi sáng",
+  "shipping_method_id": 1,
+  "payment_method_id": 1
+}
+
+{
+    "message": "Thành công",
+    "code": 200,
+    "data": {
+        "id": "e27128ff-71cf-49b0-82fb-58b213199ec6",
+        "phone_country_code": "+84",
+        "phone": null,
+        "full_name": null,
+        "email": null,
+        "email_option": 3,
+        "shipping_address": null,
+        "shipping_city": null,
+        "shipping_zip_code": null,
+        "shipping_company": null,
+        "shipping_country_id": null,
+        "shipping_province_id": null,
+        "shipping_district_id": null,
+        "shipping_ward_id": null,
+        "shipping_method_id": null,
+        "shipping_method_name": null,
+        "payment_method_name": null,
+        "payment_method_id": null,
+        "pay_deposit_only": false,
+        "deposit_required": false,
+        "utm_parameters": {
+            "source": null,
+            "medium": null,
+            "campaign": null,
+            "term": null,
+            "content": null,
+            "id": null,
+            "source_platform": null,
+            "landing_site": "/",
+            "landing_site_ref": null,
+            "referrer_site": null,
+            "tracking_id": null
+        },
+        "deposit_amount": 0,
+        "deposit_codamount": 0,
+        "note": "",
+        "requires_shipping": true,
+        "created_at": "2025-09-11T08:31:05.572155100Z",
+        "updated_at": "2025-09-11T08:31:05.572155100Z",
+        "completed_at": "2025-09-11T08:31:05.572155100Z",
+        "errors": [],
+        "warnings": [],
+        "user_errors": [],
+        "ready": true,
+        "line_items": [
+            {
+                "id": "fee0a996-e803-4fc6-88ff-5df04799a8a0",
+                "seq": null,
+                "price": 9965000.0,
+                "quantity": 1,
+                "weight": 0.0,
+                "unit": null,
+                "attributes": [],
+                "components": null,
+                "variant_id": 1,
+                "variant_type": null,
+                "product_id": "6dbfc99f-d7be-4ab0-a445-b21643f397ef",
+                "product_title": "Nhẫn cầu hôn Vàng 14K đá Moissanite",
+                "variant_title": "Vàng 14K / Size 8",
+                "image_url": null,
+                "price_original": 9965000.0,
+                "line_price": 9965000.0,
+                "line_discount": null,
+                "line_weight": 0.0,
+                "line_tax": null,
+                "line_amount": 9965000.0,
+                "available_quantity": null,
+                "lot_support": null,
+                "variant_unit_id": null,
+                "unit_ratio": null,
+                "requires_shipping": true,
+                "not_allow_promotion": false,
+                "discount_allocations": []
+            }
+        ],
+        "shipping_methods": [
+            {
+                "id": 1,
+                "name": "Home Delivery",
+                "description": "Home delivery within 2-3 business days",
+                "price": 0.0,
+                "code": "home_delivery"
+            }
+        ],
+        "payment_methods": [
+            {
+                "id": 1,
+                "name": "Cash on Delivery (COD)",
+                "description": "Pay with cash when receiving the goods",
+                "code": "cod",
+                "online": false,
+                "system_type_id": 1
+            },
+            {
+                "id": 2,
+                "name": "Bank Transfer",
+                "description": "Transfer via bank account",
+                "code": "bank_transfer",
+                "online": false,
+                "system_type_id": 2
+            }
+        ],
+        "discount_allocations": [],
+        "gift_cards": [],
+        "attributes": {},
+        "discount": 0,
+        "location_id": null,
+        "location_name": null,
+        "location_country_id": null,
+        "auth_email": "+84914696665@no-email.local",
+        "auth_phone": null,
+        "auth_name": "+84914696665@no-email.local",
+        "customer_membership": null,
+        "sub_total_before_tax": 9965000.0,
+        "sub_total_tax": 0,
+        "sub_total": 9965000.0,
+        "shipping_before_tax": 9965000.0,
+        "shipping_tax": 0,
+        "shipping": 0,
+        "total_tax_included": 0,
+        "total_tax_not_included": 0,
+        "total": 9965000.0,
+        "order": null,
+        "channel": "web",
+        "disallow_loyalty_program": false,
+        "send_notify": true,
+        "send_receipt": true,
+        "allow_pick_at_location": false,
+        "pick_at_location": false,
+        "next_actions": null,
+        "einvoice_info": null,
+        "einvoice_request": null
+    }
+}
