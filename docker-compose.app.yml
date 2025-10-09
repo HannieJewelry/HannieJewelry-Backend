@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    container_name: hanniejewelry-app
+    ports:
+      - "8443:8443"
+    environment:
+      # example env vars, prefer using .env file
+      DB_URL: jdbc:postgresql://hannie-db:5432/hanniejewelry
+      DB_USERNAME: hanniejewelry
+      DB_PASSWORD: P4ssword!
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      VAULT_ADDR: http://vault:8200
+      SSL_KEYSTORE_PASSWORD: changeit
+    depends_on:
+      - hannie-db
+      - redis
+      - vault
+    networks:
+      - app_network
+
+  hannie-db:
+    image: postgres:16
+    container_name: hanniejewelry-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_PASSWORD: P4ssword!
+      POSTGRES_USER: hanniejewelry
+      POSTGRES_DB: hanniejewelry
+    volumes:
+      - hanniejewelry-db-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7.2
+    container_name: hanniejewelry-redis
+    ports:
+      - "6379:6379"
+
+  vault:
+    image: hashicorp/vault:1.18.3
+    container_name: spring_boot_vault_container
+    ports:
+      - "8200:8200"
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: "root"
+      VAULT_DEV_LISTEN_ADDRESS: "0.0.0.0:8200"
+      VAULT_LOCAL_CONFIG: |
+        {
+          "ui": true
+        }
+    cap_add:
+      - IPC_LOCK
+    networks:
+      - app_network
+
+volumes:
+  hanniejewelry-db-data:
+
+networks:
+  app_network:
+    driver: bridge

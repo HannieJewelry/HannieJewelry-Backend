@@ -1,0 +1,126 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/hanniejewelry
+    username: hanniejewelry
+    password: P4ssword!
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        format_sql: false
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master.xml
+    enabled: true
+
+  cloud:
+    vault:
+      uri: http://localhost:8200
+      token: root
+      kv:
+        enabled: true
+
+  # Mail configuration (required for EmailService)
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: your-email@gmail.com
+    password: your-app-password
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          ssl:
+            trust: smtp.gmail.com
+        enabled: true
+        backend: secret
+        default-context: springboot-vault-docker
+
+# Disable SSL for local development
+server:
+  port: 8080
+  ssl:
+    enabled: false
+
+# Logging for development
+logging:
+  level:
+    "[hanniejewelry.vn]": DEBUG
+    "[org.springframework.web]": DEBUG
+    "[org.hibernate.SQL]": INFO  # Tắt SQL debug để bớt spam
+
+# Mock/default values for third-party services
+sepay:
+  api-key: "mock-sepay-key"
+
+ably:
+  api-key: "mock-ably-key"
+  enabled: false  # Disable Ably for local development
+
+sendgrid:
+  api-key: "mock-sendgrid-key"
+  from: "test@example.com"
+
+cloudinary:
+  cloud-name: "mock-cloud"
+  api-key: "mock-cloudinary-key"
+  api-secret: "mock-cloudinary-secret"
+
+security:
+  jwt:
+    secret-key: "bG9jYWwtZGV2LXNlY3JldC1rZXktY2hhbmdlLWluLXByb2R1Y3Rpb24="
+    expiration-time: 86400000
+
+# GHN shipping API (mock values)
+ghn:
+  token: "mock-ghn-token"
+  url:
+    district: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/district"
+    province: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/province"
+    ward: "https://dev-online-gateway.ghn.vn/shiip/public-api/master-data/ward"
+
+# Haravan integration (mock)
+haravan:
+  access-token: "mock-haravan-token"
+
+# SMS services (mock)
+speedsms:
+  access-token: "mock-speedsms-token"
+
+textbee:
+  device-id: "mock-device-id"
+  api-key: "mock-textbee-key"
+
+# Demo API key
+app:
+  demoApiKey: "mock-demo-api-key"
+
+# Axon Framework configuration
+axon:
+  axonserver:
+    servers: localhost:8124
+    context: default
+    # API token for authentication
+    # For local: uncomment and paste token directly
+    # token: "your-actual-token-here"
+    # For production: use environment variable (recommended)
+    token: 8d60fe75-c200-4989-95fc-44517740042e
+  # Event Processing configuration để giảm SQL updates
+  eventhandling:
+    processors:
+      default:
+        # Giảm tần suất heartbeat (default: 1000ms = 1 giây)
+        token-claim-interval: 5000  # milliseconds

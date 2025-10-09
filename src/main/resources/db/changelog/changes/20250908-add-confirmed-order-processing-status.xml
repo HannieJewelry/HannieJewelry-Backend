@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet id="20250908-add-confirmed-order-processing-status" author="system">
+        <comment>Add CONFIRMED status to order_processing_status check constraint</comment>
+        
+        <!-- Drop the existing check constraint -->
+        <sql>
+            ALTER TABLE tb_orders DROP CONSTRAINT IF EXISTS tb_orders_order_processing_status_check;
+        </sql>
+        
+        <!-- Add the new check constraint with CONFIRMED status -->
+        <sql>
+            ALTER TABLE tb_orders ADD CONSTRAINT tb_orders_order_processing_status_check 
+            CHECK (order_processing_status IN ('PENDING', 'PROCESSING', 'CONFIRMED', 'SELF_DELIVERY', 'COMPLETED', 'FAILED', 'CANCEL'));
+        </sql>
+        
+        <rollback>
+            <!-- Rollback: Remove CONFIRMED from the constraint -->
+            <sql>
+                ALTER TABLE tb_orders DROP CONSTRAINT IF EXISTS tb_orders_order_processing_status_check;
+            </sql>
+            <sql>
+                ALTER TABLE tb_orders ADD CONSTRAINT tb_orders_order_processing_status_check 
+                CHECK (order_processing_status IN ('PENDING', 'PROCESSING', 'SELF_DELIVERY', 'COMPLETED', 'FAILED', 'CANCEL'));
+            </sql>
+        </rollback>
+    </changeSet>
+
+</databaseChangeLog>

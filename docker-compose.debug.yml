@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8443:8443"
+      - "5005:5005" # JDWP debug port
+    environment:
+      # disable SSL for local debug to avoid keystore issues
+      SERVER_SSL_ENABLED: "false"
+      DB_URL: jdbc:postgresql://hannie-db:5432/hanniejewelry
+      DB_USERNAME: hanniejewelry
+      DB_PASSWORD: P4ssword!
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+    command: ["java", "-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=*:5005", "-jar", "/app/app.jar"]
+    depends_on:
+      - hannie-db
+      - redis
+      - vault
+    networks:
+      - app_network

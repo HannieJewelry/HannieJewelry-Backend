@@ -1,0 +1,54 @@
+name: Auto Deploy to VPS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup JDK 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 21
+
+      - name: Build with Maven
+        run: mvn clean package -DskipTests
+
+      - name: Copy jar to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          source: target/hanniejewelry-0.0.1-SNAPSHOT.jar
+          target: /root/app/
+
+      - name: Restart app service on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            sudo systemctl daemon-reload
+            sudo systemctl restart hanniejewelry.service
+            sudo systemctl status hanniejewelry.service --no-pager
+
+      - name: Check app running and logs
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+          script: |
+            echo "=== Process list for app ==="
+            pgrep -fl hanniejewelry-0.0.1-SNAPSHOT.jar || echo "App is not running"
+            echo "=== Last 20 lines of journal ==="
+            journalctl -u hanniejewelry.service -n 20 --no-pager

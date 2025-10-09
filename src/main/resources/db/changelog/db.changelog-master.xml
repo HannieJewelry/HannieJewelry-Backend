@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+    <include file="changes/create-user-tables.xml" relativeToChangelogFile="true"/>
+    <include file="/db/changelog/changes/insert-sample-rolev2.xml"/>
+    <include file="/db/changelog/changes/20250725-product-option-valuesvv4.xml"/>
+<!--    <include file="/db/changelog/changes/20250908-add-confirmed-order-processing-status.xml"/>-->
+</databaseChangeLog>
